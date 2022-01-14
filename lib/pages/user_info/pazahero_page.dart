@@ -1,11 +1,19 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_admin_tut/global/global.dart';
+import 'package:ecommerce_admin_tut/helpers/enumerators.dart';
+import 'package:ecommerce_admin_tut/provider/app_provider.dart';
 import 'package:ecommerce_admin_tut/provider/tables.dart';
+import 'package:ecommerce_admin_tut/rounting/route_names.dart';
+import 'package:ecommerce_admin_tut/services/navigation_service.dart';
 import 'package:ecommerce_admin_tut/widgets/page_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:responsive_table/responsive_table.dart';
+
+import '../../locator.dart';
 
 class PazaheroPage extends StatefulWidget {
   @override
@@ -17,13 +25,15 @@ class _PazaheroPageState extends State<PazaheroPage> {
   void dispose() {
     super.dispose();
   }
-  List user = ["All Pazahero", "Active","DeActivated"];
-  String userType;
+  List pazahero = ["All Pazahero", "Active","DeActivated"];
+  String pazaheroType;
+
+
   TextEditingController usertypeTextEditingController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
+    final AppProvider appProvider = Provider.of<AppProvider>(context);
     final TablesProvider tablesProvider = Provider.of<TablesProvider>(context);
     return SingleChildScrollView(
         child: Column(
@@ -48,13 +58,43 @@ class _PazaheroPageState extends State<PazaheroPage> {
                         children:[
                           RaisedButton.icon(
                               color: Colors.green,
-                              onPressed: () {},
+                              onPressed: () {
+                                Map<String, dynamic> userData =
+                                {
+                                  "status": "approved",
+                                };
+                                FirebaseFirestore.instance.collection("PazadaUsers")
+                                    .doc(id)
+                                    .update(userData).then((value)
+                                {
+                                  print("Account Activated successfully.");
+                                  appProvider.changeCurrentPage(DisplayedPage.PAZAHERO);
+                                  locator<NavigationService>().navigateTo(PazaheroRoute);
+                                  tablesProvider.initData();
+                                });
+                              },
                               icon: Icon(Icons.check_circle_outline,color: Colors.white,),
                               label: Text("Activate",style: TextStyle(color: Colors.white))),
                           SizedBox(width: 10,),
                           RaisedButton.icon(
                               color: Colors.red,
-                              onPressed: () {},
+                              onPressed: () {
+                                Map<String, dynamic> userData =
+                                {
+                                  "status": "not approved",
+                                };
+                                FirebaseFirestore.instance.collection("PazadaUsers")
+                                    .doc(id)
+                                    .update(userData).then((value)
+                                {
+
+                                  print("Account Blocked successfully.");
+                                  appProvider.changeCurrentPage(DisplayedPage.PAZAHERO);
+                                  locator<NavigationService>().navigateTo(PazaheroRoute);
+                                  tablesProvider.initData();
+
+                                });
+                              },
                               icon: Icon(Icons.remove_circle_outline,color: Colors.white,),
                               label: Text("DeActivate", style: TextStyle(color: Colors.white))),
                           SizedBox(width: 10,),
@@ -75,18 +115,18 @@ class _PazaheroPageState extends State<PazaheroPage> {
                                 isExpanded: true,
                                 icon: Icon(Icons.arrow_drop_down, size: 25,),
                                 hint: Text("See User",style: TextStyle(fontSize: 12, fontFamily: "bolt"),textAlign: TextAlign.center, ),
-                                value: userType,
+                                value: pazaheroType,
                                 onChanged:(userValue){
                                   setState(() {
-                                    userType = userValue;
-                                    usertypeTextEditingController.text = userType;
+                                    pazaheroType = userValue;
+                                    usertypeTextEditingController.text = pazaheroType;
                                   });
                                 },
-                                items: user.map((vehicleItem){
+                                items: pazahero.map((pazaheroItem){
                                   return DropdownMenuItem(
 
-                                    value: vehicleItem,
-                                    child: Text(vehicleItem,style: TextStyle(fontSize: 12, fontFamily: "bolt"),textAlign: TextAlign.center,),
+                                    value: pazaheroItem,
+                                    child: Text(pazaheroItem,style: TextStyle(fontSize: 12, fontFamily: "bolt"),textAlign: TextAlign.center,),
                                   );
                                 }).toList(),
                               ),

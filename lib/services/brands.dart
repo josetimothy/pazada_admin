@@ -5,7 +5,7 @@ import 'package:ecommerce_admin_tut/models/brands.dart';
 class BrandsServices {
   String collection = "PazadaSellers";
 
-  Future<List<BrandModel>> getAll() async =>
+  Future<List<BrandModel>> getAllseller() async =>
       firebaseFiretore.collection(collection).get().then((result) {
         List<BrandModel> brands = [];
         for (DocumentSnapshot brand in result.docs) {

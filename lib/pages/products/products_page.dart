@@ -1,11 +1,19 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_admin_tut/global/global.dart';
+import 'package:ecommerce_admin_tut/helpers/enumerators.dart';
+import 'package:ecommerce_admin_tut/provider/app_provider.dart';
 import 'package:ecommerce_admin_tut/provider/tables.dart';
+import 'package:ecommerce_admin_tut/rounting/route_names.dart';
+import 'package:ecommerce_admin_tut/services/navigation_service.dart';
 import 'package:ecommerce_admin_tut/widgets/page_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:responsive_table/responsive_table.dart';
+
+import '../../locator.dart';
 
 class ProductsPage extends StatefulWidget {
   @override
@@ -13,6 +21,8 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
+  get appProvider => null;
+
   @override
   void dispose() {
     super.dispose();
@@ -20,6 +30,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final AppProvider appProvider = Provider.of<AppProvider>(context);
     final TablesProvider tablesProvider = Provider.of<TablesProvider>(context);
     return SingleChildScrollView(
         child: Column(
@@ -46,7 +57,20 @@ class _ProductsPageState extends State<ProductsPage> {
                       SizedBox(width: 10,),
                       RaisedButton.icon(
                           color: Colors.red,
-                          onPressed: () {},
+                          onPressed: () {
+
+                            FirebaseFirestore.instance.collection("PazadaProducts")
+                                .doc(id)
+                                .delete().then((value)
+                            {
+
+                              print("Product Removed successfully.");
+                              appProvider.changeCurrentPage(DisplayedPage.PRODUCTS);
+                              locator<NavigationService>().navigateTo(ProductsRoute);
+                              tablesProvider.initData();
+
+                            });
+                          },
                           icon: Icon(Icons.delete,color: Colors.white,),
                           label: Text("Delete", style: TextStyle(color: Colors.white))),
                     ]),

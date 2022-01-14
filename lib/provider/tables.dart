@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:ecommerce_admin_tut/global/global.dart';
 import 'package:ecommerce_admin_tut/models/brands.dart';
 import 'package:ecommerce_admin_tut/models/categories.dart';
 import 'package:ecommerce_admin_tut/models/driver.dart';
@@ -39,6 +40,12 @@ class TablesProvider with ChangeNotifier {
         show: true,
         sortable: true,
         textAlign: TextAlign.left),
+    DatatableHeader(
+        text: "Status",
+        value: "status",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.left),
   ];
   List<DatatableHeader> driverTableHeader = [//drivers
     DatatableHeader(
@@ -57,6 +64,12 @@ class TablesProvider with ChangeNotifier {
     DatatableHeader(
         text: "Email",
         value: "email",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.left),
+    DatatableHeader(
+        text: "Status",
+        value: "status",
         show: true,
         sortable: true,
         textAlign: TextAlign.left),
@@ -167,6 +180,18 @@ class TablesProvider with ChangeNotifier {
         flex: 2,
         sortable: true,
         textAlign: TextAlign.left),
+    DatatableHeader(
+        text: "Email",
+        value: "email",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.left),
+    DatatableHeader(
+        text: "Status",
+        value: "status",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.left),
   ];
 
   List<DatatableHeader> categoriesTableHeader = [
@@ -236,11 +261,11 @@ class TablesProvider with ChangeNotifier {
     _driver = await _driverServices.getAllDriver();//driver
     _orders = await _orderServices.getAllOrders();
     _products = await _productsServices.getAllProducts();
-    _brands = await _brandsServices.getAll();
+    _brands = await _brandsServices.getAllseller();//seller
     _categories = await _categoriesServices.getAll();
   }
 
-  List<Map<String, dynamic>> _getUsersData() {
+  List<Map<String, dynamic>> getUsersData() {//refresh
     isLoading = true;
     notifyListeners();
     List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
@@ -251,7 +276,110 @@ class TablesProvider with ChangeNotifier {
         "id": userData.id,
         "email": userData.email,
         "name": userData.name,
+        "status": userData.status,
       });
+
+      i++;
+    }
+    isLoading = false;
+    notifyListeners();
+    return temps;
+  }
+
+  List<Map<String, dynamic>> getDriverData() { //driver
+    isLoading = true;
+    notifyListeners();
+    List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
+    var i = _driver.length;
+    print(i);
+    for (DriverModel driverData in _driver) {
+      temps.add({
+        "id": driverData.id,
+        "email": driverData.email,
+        "name": driverData.name,
+        "status": driverData.status,
+
+      });
+      i++;
+    }
+    isLoading = false;
+    notifyListeners();
+    return temps;
+  }
+
+  List<Map<String, dynamic>> getBrandsData() {//seller
+    List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
+    for (BrandModel brand in _brands) {
+      temps.add({
+        "id": brand.id,
+        "brand": brand.brand,
+        "name": brand.name,
+        "status": brand.status,
+      });
+    }
+    return temps;
+  }
+
+  List<Map<String, dynamic>> getCategoriesData() {
+    List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
+
+    for (CategoriesModel category in _categories) {
+      temps.add({
+        "id": category.id,
+        "category": category.category,
+      });
+    }
+    return temps;
+  }
+
+  List<Map<String, dynamic>> getOrdersData() {
+    List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
+    for (OrderModel order in _orders) {
+      temps.add({
+        "id": order.id,
+        "userId": order.userId,
+        "description": order.description,
+        "createdAt": DateFormat.yMMMd()
+            .format(DateTime.fromMillisecondsSinceEpoch(order.createdAt)),
+        "total": "\$${order.total}",
+      });
+    }
+    return temps;
+  }
+
+  List<Map<String, dynamic>> getProductsData() {
+    List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
+    for (ProductModel product in _products) {
+      temps.add({
+
+        "menuName": product.menuName,
+        "price": product.price,
+        "productDetails": product.productDetails,
+        "productID": product.productID,
+        "publishedDate": product.publishedDate.toDate(),
+        "productName": product.productName,
+        "sellerName": product.sellerName,
+        "status": product.status,
+        "pic": product.pic,
+      });
+    }
+    return temps;
+  }
+
+  List<Map<String, dynamic>> _getUsersData() {//orginal table
+    isLoading = true;
+    notifyListeners();
+    List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
+    var i = _users.length;
+    print(i);
+    for (UserModel userData in _users) {
+      temps.add({
+        "id": userData.id,
+        "email": userData.email,
+        "name": userData.name,
+        "status": userData.status,
+      });
+
       i++;
     }
     isLoading = false;
@@ -289,7 +417,7 @@ class TablesProvider with ChangeNotifier {
     return temps;
   }
 
-  List<Map<String, dynamic>> _getCategoriesData() {
+  List<Map<String, dynamic>> _getCategoriesData() {//seller
     List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
 
     for (CategoriesModel category in _categories) {
@@ -335,6 +463,26 @@ class TablesProvider with ChangeNotifier {
     return temps;
   }
 
+  initData() async {// refresh
+    isLoading = true;
+    notifyListeners();
+    await _loadFromFirebase();
+    usersTableSource.clear();
+    usersTableSource.addAll(getUsersData());
+    driverTableSource.clear();
+    driverTableSource.addAll(getDriverData());
+    ordersTableSource.clear();
+    ordersTableSource.addAll(getOrdersData());
+    productsTableSource.clear();
+    productsTableSource.addAll(getProductsData());
+    categoriesTableSource.clear();
+    categoriesTableSource.addAll(getCategoriesData());
+    brandsTableSource.clear();
+    brandsTableSource.addAll(getBrandsData());
+
+    isLoading = false;
+    notifyListeners();
+  }
   _initData() async {
     isLoading = true;
     notifyListeners();
@@ -363,16 +511,22 @@ class TablesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  onSelected(bool value, Map<String, dynamic> item) {
-    print("$value  $item ");
+  onSelected(bool value, Map<String, dynamic> item) {//ito single selection
+    print("$value  $item + t=============================");
     if (value) {
+      id= item.values.first;
+      print(id);
+      print("===================================");
       selecteds.add(item);
 
     } else {
       selecteds.removeAt(selecteds.indexOf(item));
+      print("unselected all");
+
     }
     notifyListeners();
   }
+
   onSelectAll(bool value) {
     if (value) {
       selecteds = pazshipTableSource.map((entry) => entry).toList().cast();

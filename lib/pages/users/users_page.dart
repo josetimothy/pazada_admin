@@ -92,6 +92,7 @@ class _UsersPageState extends State<UsersPage> {
                     isLoading: tablesProvider.isLoading,
                     onSelect: tablesProvider.onSelected,
                     onSelectAll: tablesProvider.onSelectAlluser,
+
                     footers: [
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 15),

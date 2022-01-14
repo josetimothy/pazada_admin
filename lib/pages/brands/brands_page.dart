@@ -1,20 +1,35 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_admin_tut/global/global.dart';
+import 'package:ecommerce_admin_tut/helpers/enumerators.dart';
+import 'package:ecommerce_admin_tut/provider/app_provider.dart';
 import 'package:ecommerce_admin_tut/provider/tables.dart';
+import 'package:ecommerce_admin_tut/rounting/route_names.dart';
+import 'package:ecommerce_admin_tut/services/navigation_service.dart';
 import 'package:ecommerce_admin_tut/widgets/page_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:responsive_table/responsive_table.dart';
 
+import '../../locator.dart';
+
 class BrandsPage extends StatefulWidget {
   @override
   _BrandsPageState createState() => _BrandsPageState();
 }
 
+
 class _BrandsPageState extends State<BrandsPage> {
+
+  List seller = ["All Seller", "Active","DeActivated"];
+  String sellerType;
+
+  TextEditingController usertypeTextEditingController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final AppProvider appProvider = Provider.of<AppProvider>(context);
     final TablesProvider tablesProvider = Provider.of<TablesProvider>(context);
     return SingleChildScrollView(
         child: Column(
@@ -39,15 +54,79 @@ class _BrandsPageState extends State<BrandsPage> {
                     children:[
                       RaisedButton.icon(
                           color: Colors.green,
-                          onPressed: () {},
+                          onPressed: () {
+                            Map<String, dynamic> userData =
+                            {
+                              "status": "approved",
+                            };
+                            FirebaseFirestore.instance.collection("PazadaSellers")
+                                .doc(id)
+                                .update(userData).then((value)
+                            {
+
+                              print("Account Activated successfully.");
+                              appProvider.changeCurrentPage(DisplayedPage.SELLER);
+                              locator<NavigationService>().navigateTo(SellerRoute);
+                              tablesProvider.initData();
+                            });
+                          },
                           icon: Icon(Icons.check_circle_outline,color: Colors.white,),
                           label: Text("Activate",style: TextStyle(color: Colors.white))),
                       SizedBox(width: 10,),
                       RaisedButton.icon(
                           color: Colors.red,
-                          onPressed: () {},
+                          onPressed: () {
+                            Map<String, dynamic> userData =
+                            {
+                              "status": "not approved",
+                            };
+                            FirebaseFirestore.instance.collection("PazadaSellers")
+                                .doc(id)
+                                .update(userData).then((value)
+                            {
+
+                              print("Account Blocked successfully.");
+                              appProvider.changeCurrentPage(DisplayedPage.SELLER);
+                              locator<NavigationService>().navigateTo(SellerRoute);
+                              tablesProvider.initData();
+                            });
+                          },
                           icon: Icon(Icons.remove_circle_outline,color: Colors.white,),
                           label: Text("DeActivate", style: TextStyle(color: Colors.white))),
+                      Container(//dropdown
+                        height: 33,
+                        width: MediaQuery.of(context).size.width * .10,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(5),
+
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal:0, ),
+                          child: DropdownButton(
+
+                            underline: SizedBox(),
+                            isExpanded: true,
+                            icon: Icon(Icons.arrow_drop_down, size: 25,),
+                            hint: Text("See User",style: TextStyle(fontSize: 12, fontFamily: "bolt"),textAlign: TextAlign.center, ),
+                            value: sellerType,
+                            onChanged:(sellerValue){
+                              setState(() {
+                                sellerType = sellerValue;
+                                usertypeTextEditingController.text = sellerType;
+                              });
+                            },
+                            items: seller.map((pazaheroItem){
+                              return DropdownMenuItem(
+
+                                value: pazaheroItem,
+                                child: Text(pazaheroItem,style: TextStyle(fontSize: 12, fontFamily: "bolt"),textAlign: TextAlign.center,),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+
                     ]),
 
                 // actions: [
