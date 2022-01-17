@@ -4,9 +4,9 @@ import 'package:ecommerce_admin_tut/pages/brands/brands_page.dart';
 import 'package:ecommerce_admin_tut/pages/categories/categories_page.dart';
 import 'package:ecommerce_admin_tut/pages/login/login.dart';
 import 'package:ecommerce_admin_tut/pages/registration/registration.dart';
-import 'package:ecommerce_admin_tut/pages/transaction/pazabuy_page.dart';
-import 'package:ecommerce_admin_tut/pages/transaction/pazakay_page.dart';
-import 'package:ecommerce_admin_tut/pages/transaction/pazship_page.dart';
+import 'package:ecommerce_admin_tut/pages/transaction/seller_history.dart';
+import 'package:ecommerce_admin_tut/pages/transaction/pazahero_history.dart';
+import 'package:ecommerce_admin_tut/pages/transaction/driver_history.dart';
 import 'package:ecommerce_admin_tut/pages/user_info/driver_page.dart';
 import 'package:ecommerce_admin_tut/pages/user_info/pazahero_page.dart';
 import 'package:ecommerce_admin_tut/services/orderWidget/order_screen.dart';
@@ -25,6 +25,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case HomeRoute:
       return _getPageRoute(HomePage());
+
+
     // case UsersRoute:
     //   return _getPageRoute(UsersPage());
     case UserScreenRoute:
@@ -37,16 +39,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(BrandsPage());//ito sellers
     case ProductsRoute:
       return _getPageRoute(ProductsPage());
+
+
     // case OrdersRoute:
     //   return _getPageRoute(OrdersPage());
     case OrdersScreenRoute:
       return _getPageRoute(OrderScreen());//ito yung sa transaction screen
-    case PazabuyRoute:
-      return _getPageRoute(PazabuyPage());//ito yung sa transaction
-    case PazshipRoute:
-      return _getPageRoute(PazshipPage());//ito yung sa transaction
-    case PazakayRoute:
-      return _getPageRoute(PazakayPage());//ito yung sa transaction
+    case SellerHistoryRoute:
+      return _getPageRoute(SellerHistoryPage());//ito yung sa transaction
+    case DriverHistoryRoute:
+      return _getPageRoute(DriverHistoryPage());//ito yung sa transaction
+    case PazaheroHistoryRoute:
+      return _getPageRoute(PazaheroHistoryPage());//ito yung sa transaction
+
+
     case LoginRoute:
       return _getPageRoute(LoginPage());
     case RegistrationRoute:

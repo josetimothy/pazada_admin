@@ -21,13 +21,6 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
-  get appProvider => null;
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
@@ -58,7 +51,6 @@ class _ProductsPageState extends State<ProductsPage> {
                       RaisedButton.icon(
                           color: Colors.red,
                           onPressed: () {
-
                             FirebaseFirestore.instance.collection("PazadaProducts")
                                 .doc(id)
                                 .delete().then((value)

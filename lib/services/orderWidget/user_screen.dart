@@ -1,7 +1,7 @@
 import 'dart:js';
 
 import 'package:ecommerce_admin_tut/helpers/enumerators.dart';
-import 'package:ecommerce_admin_tut/pages/transaction/pazabuy_page.dart';
+import 'package:ecommerce_admin_tut/pages/transaction/seller_history.dart';
 import 'package:ecommerce_admin_tut/provider/app_provider.dart';
 import 'package:ecommerce_admin_tut/rounting/route_names.dart';
 import 'package:ecommerce_admin_tut/widgets/cards/card_item.dart';
@@ -32,7 +32,7 @@ class UserScreen extends StatelessWidget {
             child: CardItem(
               icon: Icons.monetization_on_outlined,
               title: "PazaHeros",
-              subtitle: "Revenue this month",
+              subtitle: "Total orders for this month",
               // value: "\$ 4,323",
               color1: Colors.green.shade700,
               color2: Colors.green,
@@ -49,7 +49,7 @@ class UserScreen extends StatelessWidget {
             child: CardItem(
               icon: Icons.shopping_basket_outlined,
               title: "Drivers",
-              subtitle: "Total products on store",
+              subtitle: "Total orders for this month",
               // value: "231",
               color1: Colors.lightBlueAccent,
               color2: Colors.blue,

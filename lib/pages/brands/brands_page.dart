@@ -66,7 +66,7 @@ class _BrandsPageState extends State<BrandsPage> {
 
                               print("Account Activated successfully.");
                               appProvider.changeCurrentPage(DisplayedPage.SELLER);
-                              locator<NavigationService>().navigateTo(SellerRoute);
+                              locator<NavigationService>().navigateTo(BrandsRoute);
                               tablesProvider.initData();
                             });
                           },
@@ -87,12 +87,13 @@ class _BrandsPageState extends State<BrandsPage> {
 
                               print("Account Blocked successfully.");
                               appProvider.changeCurrentPage(DisplayedPage.SELLER);
-                              locator<NavigationService>().navigateTo(SellerRoute);
+                              locator<NavigationService>().navigateTo(BrandsRoute);
                               tablesProvider.initData();
                             });
                           },
                           icon: Icon(Icons.remove_circle_outline,color: Colors.white,),
                           label: Text("DeActivate", style: TextStyle(color: Colors.white))),
+                      SizedBox(width: 10,),
                       Container(//dropdown
                         height: 33,
                         width: MediaQuery.of(context).size.width * .10,

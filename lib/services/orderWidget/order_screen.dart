@@ -1,7 +1,8 @@
 import 'dart:js';
 
 import 'package:ecommerce_admin_tut/helpers/enumerators.dart';
-import 'package:ecommerce_admin_tut/pages/transaction/pazabuy_page.dart';
+import 'package:ecommerce_admin_tut/pages/transaction/pazahero_history.dart';
+import 'package:ecommerce_admin_tut/pages/transaction/seller_history.dart';
 import 'package:ecommerce_admin_tut/provider/app_provider.dart';
 import 'package:ecommerce_admin_tut/rounting/route_names.dart';
 import 'package:ecommerce_admin_tut/widgets/cards/card_item.dart';
@@ -21,17 +22,17 @@ class OrderScreen extends StatelessWidget {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
     return ListView(
       children: [
-        PageHeader(text: 'PAZADA TRANSACTIONS',),
+        PageHeader(text: 'TRANSACTION HISTORY',),
         GestureDetector(
           onTap: (){
             appProvider.changeCurrentPage(DisplayedPage.ORDERSCREEN);
-            locator<NavigationService>().navigateTo(PazakayRoute);
+            locator<NavigationService>().navigateTo(PazaheroHistoryRoute);
             },
           child: Padding(
             padding: const EdgeInsets.all(14),
             child: CardItem(
               icon: Icons.monetization_on_outlined,
-              title: "Pazakay Transaction",
+              title: "Pazahero Transaction History",
               subtitle: "Revenue this month",
               // value: "\$ 4,323",
               color1: Colors.green.shade700,
@@ -42,14 +43,14 @@ class OrderScreen extends StatelessWidget {
         GestureDetector(
           onTap: (){
             appProvider.changeCurrentPage(DisplayedPage.ORDERSCREEN);
-            locator<NavigationService>().navigateTo(PazabuyRoute);
+            locator<NavigationService>().navigateTo(DriverHistoryRoute);
           },
           child: Padding(
             padding: const EdgeInsets.all(14),
             child: CardItem(
               icon: Icons.shopping_basket_outlined,
-              title: "Pazabuy Transaction",
-              subtitle: "Total products on store",
+              title: "Pazada Driver Transaction History",
+              subtitle: "Total orders for this month",
               // value: "231",
               color1: Colors.lightBlueAccent,
               color2: Colors.blue,
@@ -59,13 +60,13 @@ class OrderScreen extends StatelessWidget {
         GestureDetector(
           onTap: (){
             appProvider.changeCurrentPage(DisplayedPage.ORDERSCREEN);
-            locator<NavigationService>().navigateTo(PazshipRoute);
+            locator<NavigationService>().navigateTo(SellerHistoryRoute);
           },
           child: Padding(
             padding: const EdgeInsets.all(14),
             child: CardItem(
               icon: Icons.delivery_dining,
-              title: "Pazship Transaction",
+              title: "Pazada Seller Transaction History",
               subtitle: "Total orders for this month",
               // value: "33",
               color1: Colors.redAccent,

@@ -5,12 +5,16 @@ import 'package:ecommerce_admin_tut/models/brands.dart';
 import 'package:ecommerce_admin_tut/models/categories.dart';
 import 'package:ecommerce_admin_tut/models/driver.dart';
 import 'package:ecommerce_admin_tut/models/orders.dart';
+import 'package:ecommerce_admin_tut/models/pazadadriverhistory.dart';
+import 'package:ecommerce_admin_tut/models/pazadauserhistory.dart';
 import 'package:ecommerce_admin_tut/models/products.dart';
 import 'package:ecommerce_admin_tut/models/user.dart';
 import 'package:ecommerce_admin_tut/services/brands.dart';
 import 'package:ecommerce_admin_tut/services/categories.dart';
 import 'package:ecommerce_admin_tut/services/driver.dart';
 import 'package:ecommerce_admin_tut/services/orders.dart';
+import 'package:ecommerce_admin_tut/services/pazadadriverhistory.dart';
+import 'package:ecommerce_admin_tut/services/pazadauserhistory.dart';
 import 'package:ecommerce_admin_tut/services/products.dart';
 import 'package:ecommerce_admin_tut/services/user.dart';
 
@@ -26,26 +30,26 @@ class TablesProvider with ChangeNotifier {
         value: "id",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Name",
         value: "name",
         show: true,
         flex: 2,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Email",
         value: "email",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Status",
         value: "status",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
   ];
   List<DatatableHeader> driverTableHeader = [//drivers
     DatatableHeader(
@@ -53,26 +57,26 @@ class TablesProvider with ChangeNotifier {
         value: "id",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Name",
         value: "name",
         show: true,
         flex: 2,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
-        text: "Email",
-        value: "email",
+        text: "Phone Number",
+        value: "usernumber",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Status",
         value: "status",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
   ];
 
   List<DatatableHeader> ordersTableHeader = [
@@ -81,37 +85,37 @@ class TablesProvider with ChangeNotifier {
         value: "id",
         show: false,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "User Id",
         value: "userId",
         show: true,
         flex: 2,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Description",
         value: "description",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Created At",
         value: "createdAt",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Total",
         value: "total",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
   ];
 
   List<DatatableHeader> productsTableHeader = [
     DatatableHeader(
-        text: "Product ID",
+        text: "ID",
         value: "productID",
         show: true,
         sortable: true,
@@ -139,7 +143,7 @@ class TablesProvider with ChangeNotifier {
         value: "publishedDate",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Seller Name",
         value: "sellerName",
@@ -172,26 +176,32 @@ class TablesProvider with ChangeNotifier {
         value: "id",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Brand",
         value: "brand",
         show: true,
         flex: 2,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Email",
         value: "email",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Status",
         value: "status",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
+    DatatableHeader(
+        text: "Location",
+        value: "location",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.center),
   ];
 
   List<DatatableHeader> categoriesTableHeader = [
@@ -200,15 +210,92 @@ class TablesProvider with ChangeNotifier {
         value: "id",
         show: true,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
     DatatableHeader(
         text: "Category",
         value: "category",
         show: true,
         flex: 2,
         sortable: true,
-        textAlign: TextAlign.left),
+        textAlign: TextAlign.center),
   ];
+
+  List<DatatableHeader> UserHistoryTableHeader = [//user history
+  DatatableHeader(
+      text: "ID",
+      value: "pazadaHistoryID",
+      show: true,
+      sortable: true,
+      textAlign: TextAlign.center
+  ),
+  DatatableHeader(
+    text: "Service Type",
+    value: "service_type",
+    show: true,
+    sortable: true,
+    textAlign: TextAlign.center
+  ),
+  DatatableHeader(
+    text: "Fair",
+    value: "price",
+    show: true,
+    sortable: true,
+    textAlign: TextAlign.center
+  ),
+    DatatableHeader(
+        text: "Driver Name",
+        value: "driver_name",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.center
+    ),
+    DatatableHeader(
+        text: "Driver Phone",
+        value: "driver_phone",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.center
+    ),
+  DatatableHeader(
+  text: "Transaction Date",
+  value: "created_at",
+  show: true,
+  sortable: true,
+  textAlign: TextAlign.center
+  ),
+  DatatableHeader(
+  text: "Passenger Name",
+  value: "passenger_name",
+  show: true,
+  sortable: true,
+  textAlign: TextAlign.center
+  ),
+  DatatableHeader(
+  text: "Passenger Phone",
+  value: "passenger_phone",
+  show: true,
+  sortable: true,
+  textAlign: TextAlign.center
+  ),
+  DatatableHeader(
+  text: "Pickup Address",
+  value: "pickup_address",
+  show: true,
+  sortable: true,
+  textAlign: TextAlign.center
+  ),
+    DatatableHeader(
+        text: "Destination Address",
+        value: "destination_address",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.center
+    ),
+  ];
+
+
+
+
   List<int> perPages = [5, 10, 15, 100];
   int total = 100;
   int currentPerPage;
@@ -219,9 +306,11 @@ class TablesProvider with ChangeNotifier {
   List<Map<String, dynamic>> driverTableSource = List<Map<String, dynamic>>();//drivers
   List<Map<String, dynamic>> brandsTableSource = List<Map<String, dynamic>>();//seller
   List<Map<String, dynamic>> ordersTableSource = List<Map<String, dynamic>>();
-  List<Map<String, dynamic>> pazakayTableSource = List<Map<String, dynamic>>();//pazakay
-  List<Map<String, dynamic>> pazabuyTableSource = List<Map<String, dynamic>>();//pazabuy
-  List<Map<String, dynamic>> pazshipTableSource = List<Map<String, dynamic>>();//pazship
+
+  List<Map<String, dynamic>> UserHistoryleSource = List<Map<String, dynamic>>();//user history
+  List<Map<String, dynamic>> pazabuyTableSource = List<Map<String, dynamic>>();//driverhistory
+  List<Map<String, dynamic>> pazshipTableSource = List<Map<String, dynamic>>();//sellerhistory
+
   List<Map<String, dynamic>> productsTableSource = List<Map<String, dynamic>>();
   List<Map<String, dynamic>> categoriesTableSource = List<Map<String, dynamic>>();
 
@@ -246,15 +335,20 @@ class TablesProvider with ChangeNotifier {
   List<OrderModel> _orders = <OrderModel>[];
   List<OrderModel> get orders => _orders;
 
-  ProductsServices _productsServices = ProductsServices();
+  ProductsServices _productsServices = ProductsServices();//product
   List<ProductModel> _products = <ProductModel>[];
   List<ProductModel> get products => _products;
 
   CategoriesServices _categoriesServices = CategoriesServices();
   List<CategoriesModel> _categories = <CategoriesModel>[];
 
-  BrandsServices _brandsServices = BrandsServices();
+  BrandsServices _brandsServices = BrandsServices();//seller
   List<BrandModel> _brands = <BrandModel>[];
+
+  PazadaUserHistoryServices _userhistoryServices = PazadaUserHistoryServices();//user history
+  List<PazadaUserHistoryModel> _userhistory = <PazadaUserHistoryModel>[];
+
+
 
   Future _loadFromFirebase() async {
     _users = await _userServices.getAllUsers();
@@ -263,6 +357,8 @@ class TablesProvider with ChangeNotifier {
     _products = await _productsServices.getAllProducts();
     _brands = await _brandsServices.getAllseller();//seller
     _categories = await _categoriesServices.getAll();
+    _userhistory = await _userhistoryServices.getAllPazadaUserHistory();//user history
+
   }
 
   List<Map<String, dynamic>> getUsersData() {//refresh
@@ -295,7 +391,7 @@ class TablesProvider with ChangeNotifier {
     for (DriverModel driverData in _driver) {
       temps.add({
         "id": driverData.id,
-        "email": driverData.email,
+        "usernumber": driverData.usernumber,
         "name": driverData.name,
         "status": driverData.status,
 
@@ -313,8 +409,9 @@ class TablesProvider with ChangeNotifier {
       temps.add({
         "id": brand.id,
         "brand": brand.brand,
-        "name": brand.name,
+        "email": brand.email,
         "status": brand.status,
+        "location": brand.location
       });
     }
     return temps;
@@ -351,11 +448,10 @@ class TablesProvider with ChangeNotifier {
     List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
     for (ProductModel product in _products) {
       temps.add({
-
+        "productID": product.productID,
         "menuName": product.menuName,
         "price": product.price,
         "productDetails": product.productDetails,
-        "productID": product.productID,
         "publishedDate": product.publishedDate.toDate(),
         "productName": product.productName,
         "sellerName": product.sellerName,
@@ -365,6 +461,27 @@ class TablesProvider with ChangeNotifier {
     }
     return temps;
   }
+
+  List<Map<String, dynamic>> getUserHistoryData() {
+    //userhistory
+    List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
+    for (PazadaUserHistoryModel pazadauserhistory in _userhistory) {
+      temps.add({
+        "pazadaHistoryID": pazadauserhistory.pazadaHistoryID,
+        "service_type": pazadauserhistory.service_type,
+        "price": pazadauserhistory.price,
+        "destination_address": pazadauserhistory.destination_address,
+        "created_at": pazadauserhistory.created_at.toDate(),
+        "driver_name": pazadauserhistory.driver_name,
+        "driver_phone": pazadauserhistory.driver_phone,
+        "passenger_name": pazadauserhistory.passenger_name,
+        "passenger_phone": pazadauserhistory.passenger_phone,
+        "pickup_address": pazadauserhistory.pickup_address,
+      });
+    }
+    return temps;
+  }
+
 
   List<Map<String, dynamic>> _getUsersData() {//orginal table
     isLoading = true;
@@ -396,8 +513,10 @@ class TablesProvider with ChangeNotifier {
     for (DriverModel driverData in _driver) {
       temps.add({
         "id": driverData.id,
-        "email": driverData.email,
+        "usernumber": driverData.usernumber,
         "name": driverData.name,
+        "status": driverData.status,
+
       });
       i++;
     }
@@ -406,12 +525,15 @@ class TablesProvider with ChangeNotifier {
     return temps;
   }
 
-  List<Map<String, dynamic>> _getBrandsData() {
+  List<Map<String, dynamic>> _getBrandsData() {//seller
     List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
     for (BrandModel brand in _brands) {
       temps.add({
         "id": brand.id,
         "brand": brand.brand,
+        "email": brand.email,
+        "status": brand.status,
+        "location": brand.location
       });
     }
     return temps;
@@ -448,11 +570,10 @@ class TablesProvider with ChangeNotifier {
     List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
     for (ProductModel product in _products) {
       temps.add({
-
+        "productID": product.productID,
       "menuName": product.menuName,
       "price": product.price,
       "productDetails": product.productDetails,
-      "productID": product.productID,
       "publishedDate": product.publishedDate.toDate(),
       "productName": product.productName,
       "sellerName": product.sellerName,
@@ -463,14 +584,35 @@ class TablesProvider with ChangeNotifier {
     return temps;
   }
 
+  List<Map<String, dynamic>> _getUserHistoryData() { //userhistory
+    List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
+    for (PazadaUserHistoryModel pazadauserhistory in _userhistory) {
+      temps.add({
+        "pazadaHistoryID": pazadauserhistory.pazadaHistoryID,
+        "service_type": pazadauserhistory.service_type,
+        "price": pazadauserhistory.price,
+        "destination_address": pazadauserhistory.destination_address,
+        "created_at": pazadauserhistory.created_at.toDate(),
+        "driver_name": pazadauserhistory.driver_name,
+        "driver_phone": pazadauserhistory.driver_phone,
+        "passenger_name": pazadauserhistory.passenger_name,
+        "passenger_phone": pazadauserhistory.passenger_phone,
+        "pickup_address": pazadauserhistory.pickup_address,
+      });
+    }
+    return temps;
+  }
+
+
   initData() async {// refresh
     isLoading = true;
     notifyListeners();
     await _loadFromFirebase();
+
     usersTableSource.clear();
-    usersTableSource.addAll(getUsersData());
+    usersTableSource.addAll(getUsersData());//user
     driverTableSource.clear();
-    driverTableSource.addAll(getDriverData());
+    driverTableSource.addAll(getDriverData());//driver
     ordersTableSource.clear();
     ordersTableSource.addAll(getOrdersData());
     productsTableSource.clear();
@@ -478,7 +620,13 @@ class TablesProvider with ChangeNotifier {
     categoriesTableSource.clear();
     categoriesTableSource.addAll(getCategoriesData());
     brandsTableSource.clear();
-    brandsTableSource.addAll(getBrandsData());
+    brandsTableSource.addAll(getBrandsData());//seller
+    UserHistoryleSource.clear();
+    UserHistoryleSource.addAll(getUserHistoryData());//user history
+
+
+
+
 
     isLoading = false;
     notifyListeners();
@@ -493,6 +641,9 @@ class TablesProvider with ChangeNotifier {
     productsTableSource.addAll(_getProductsData());
     categoriesTableSource.addAll(_getCategoriesData());
     brandsTableSource.addAll(_getBrandsData());
+    UserHistoryleSource.addAll(_getUserHistoryData());//user history
+
+
 
     isLoading = false;
     notifyListeners();
@@ -526,7 +677,22 @@ class TablesProvider with ChangeNotifier {
     }
     notifyListeners();
   }
-
+  // onSelectProduct(bool value, Map<String, dynamic> item) {//ito single selection
+  //   print("$value  $item + t=============================");
+  //   if (value) {
+  //     productid = item.values.first[3];
+  //     print(id);
+  //     print("===================================");
+  //     selecteds.add(item);
+  //
+  //   } else {
+  //     selecteds.removeAt(selecteds.indexOf(item));
+  //     print("unselected all");
+  //
+  //   }
+  //   notifyListeners();
+  // }
+  //
   onSelectAll(bool value) {
     if (value) {
       selecteds = pazshipTableSource.map((entry) => entry).toList().cast();
@@ -562,7 +728,7 @@ class TablesProvider with ChangeNotifier {
   }
   onSelectAllpazakay(bool value) {
     if (value) {
-      selecteds = pazakayTableSource.map((entry) => entry).toList().cast();
+      selecteds = UserHistoryleSource.map((entry) => entry).toList().cast();
     } else {
       selecteds.clear();
     }

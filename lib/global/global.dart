@@ -1,1 +1,3 @@
 String id = " ";
+String productid = "";
+

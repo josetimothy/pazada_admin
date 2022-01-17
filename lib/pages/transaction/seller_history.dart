@@ -7,12 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:responsive_table/responsive_table.dart';
 
-class PazabuyPage extends StatefulWidget {
+class SellerHistoryPage extends StatefulWidget {
   @override
-  _PazabuyPageState createState() => _PazabuyPageState();
+  _SellerHistoryPageState createState() => _SellerHistoryPageState();
 }
 
-class _PazabuyPageState extends State<PazabuyPage> {
+class _SellerHistoryPageState extends State<SellerHistoryPage> {
   List<DatatableHeader> _headers = [
     DatatableHeader(
         text: "ID",
@@ -152,7 +152,7 @@ class _PazabuyPageState extends State<PazabuyPage> {
             mainAxisSize: MainAxisSize.max,
             children: [
               PageHeader(
-                text: 'Pazabuy Transaction',
+                text: 'Seller Transaction History',
               ),
               Container(
                 margin: EdgeInsets.all(10),

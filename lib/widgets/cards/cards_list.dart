@@ -20,7 +20,7 @@ class CardsList extends StatelessWidget {
             CardItem(
               icon: Icons.monetization_on_outlined,
               title: "Revenue",
-              subtitle: "Revenue this month",
+              subtitle: "Total orders for this month",
               // value: "\$ ${appProvider.revenue}",
               color1: Colors.green.shade700,
               color2: Colors.green,
@@ -28,7 +28,7 @@ class CardsList extends StatelessWidget {
             CardItem(
               icon: Icons.shopping_basket_outlined,
               title: "Products",
-              subtitle: "Total products on store",
+              subtitle: "Total orders for this month",
               // value: "${tablesProvider.products.length}",
               color1: Colors.lightBlueAccent,
               color2: Colors.blue,

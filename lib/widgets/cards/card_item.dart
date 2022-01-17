@@ -11,6 +11,8 @@ class CardItem extends StatelessWidget {
   final Color color2;
   final IconData icon;
 
+
+
   const CardItem(
       {Key key,
       this.title,
@@ -18,7 +20,8 @@ class CardItem extends StatelessWidget {
       this.color1,
       this.color2,
       this.icon,
-      this.subtitle})
+      this.subtitle
+      })
       : super(key: key);
 
   @override
