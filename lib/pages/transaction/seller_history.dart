@@ -122,49 +122,49 @@ class _SellerHistoryPageState extends State<SellerHistoryPage> {
                     onTabRow: (data) {
                       print(data);
                     },
-                    onSort: tablesProvider.onSort,
+                    onSort: tablesProvider.onSortSellerHistory,
                     sortAscending: tablesProvider.sortAscending,
                     sortColumn: tablesProvider.sortColumn,
                     isLoading: tablesProvider.isLoading,
                     onSelect: tablesProvider.onSelected,
                     onSelectAll: tablesProvider.onSelectAllproduct,
-                    footers: [
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: Text("Rows per page:"),
-                      ),
-                      if (tablesProvider.perPages != null)
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15),
-                          child: DropdownButton(
-                              value: tablesProvider.currentPerPage,
-                              items: tablesProvider.perPages
-                                  .map((e) => DropdownMenuItem(
-                                child: Text("$e"),
-                                value: e,
-                              ))
-                                  .toList(),
-                              onChanged: (value) {}),
-                        ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                            "${tablesProvider.currentPage} - ${tablesProvider.currentPage} of ${tablesProvider.total}"),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          size: 16,
-                        ),
-                        onPressed: tablesProvider.previous,
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.arrow_forward_ios, size: 16),
-                        onPressed: tablesProvider.next,
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                      )
-                    ],
+                    // footers: [
+                    //   Container(
+                    //     padding: EdgeInsets.symmetric(horizontal: 15),
+                    //     child: Text("Rows per page:"),
+                    //   ),
+                    //   if (tablesProvider.perPages != null)
+                    //     Container(
+                    //       padding: EdgeInsets.symmetric(horizontal: 15),
+                    //       child: DropdownButton(
+                    //           value: tablesProvider.currentPerPage,
+                    //           items: tablesProvider.perPages
+                    //               .map((e) => DropdownMenuItem(
+                    //             child: Text("$e"),
+                    //             value: e,
+                    //           ))
+                    //               .toList(),
+                    //           onChanged: (value) {}),
+                    //     ),
+                    //   Container(
+                    //     padding: EdgeInsets.symmetric(horizontal: 15),
+                    //     child: Text(
+                    //         "${tablesProvider.currentPage} - ${tablesProvider.currentPage} of ${tablesProvider.total}"),
+                    //   ),
+                    //   IconButton(
+                    //     icon: Icon(
+                    //       Icons.arrow_back_ios,
+                    //       size: 16,
+                    //     ),
+                    //     onPressed: tablesProvider.previous,
+                    //     padding: EdgeInsets.symmetric(horizontal: 15),
+                    //   ),
+                    //   IconButton(
+                    //     icon: Icon(Icons.arrow_forward_ios, size: 16),
+                    //     onPressed: tablesProvider.next,
+                    //     padding: EdgeInsets.symmetric(horizontal: 15),
+                    //   )
+                    // ],
                   ),
                 ),
               ),

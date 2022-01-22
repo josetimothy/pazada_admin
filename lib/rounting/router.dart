@@ -23,8 +23,9 @@ import 'package:flutter/material.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   print('generateRoute: ${settings.name}');
   switch (settings.name) {
-    case HomeRoute:
-      return _getPageRoute(HomePage());
+
+    // case HomeRoute:
+    //   return _getPageRoute(HomePage());
 
 
     // case UsersRoute:

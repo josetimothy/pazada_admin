@@ -12,6 +12,12 @@ class PazadaSellerHistoryModel {
   static const PASSENGER_NAME = "passenger_name";
   static const PASSENGER_PHONE = "passenger_phone";
   static const PICKUP_ADDRESS = "pickup_address";
+  static const SELLERNAME = "seller_name";
+  static const ITEMNAME = "item_name";
+  static const ITEMVALUE = "item_value";
+  static const GRANDTOTAL = "Grand_Total";
+
+
 
 
   String _pazadaHistoryID;
@@ -24,6 +30,10 @@ class PazadaSellerHistoryModel {
   String _passenger_name;
   String _passenger_phone;
   String _pickup_address;
+  String _seller_name;
+  String _item_name;
+  String _item_value;
+  String _Grand_Total;
 
 
   String get pazadaHistoryID => _pazadaHistoryID;
@@ -36,6 +46,10 @@ class PazadaSellerHistoryModel {
   String get passenger_name => _passenger_name;
   String get passenger_phone => _passenger_phone;
   String get pickup_address => _pickup_address;
+  String get seller_name => _seller_name;
+  String get item_name => _item_name;
+  String get item_value => _item_value;
+  String get Grand_Total => _Grand_Total;
 
 
 
@@ -51,5 +65,9 @@ class PazadaSellerHistoryModel {
     _passenger_name = snapshot.data()[PASSENGER_NAME];
     _passenger_phone = snapshot.data()[PASSENGER_PHONE];
     _pickup_address = snapshot.data()[PICKUP_ADDRESS];
+    _seller_name = snapshot.data()[SELLERNAME];
+    _item_name = snapshot.data()[ITEMNAME];
+    _item_value = snapshot.data()[ITEMVALUE];
+    _Grand_Total = snapshot.data()[GRANDTOTAL];
   }
 }

@@ -30,7 +30,7 @@ class TablesProvider with ChangeNotifier {
     DatatableHeader(
         text: "ID",
         value: "id",
-        show: true,
+        show: false,
         sortable: true,
         textAlign: TextAlign.center),
     DatatableHeader(
@@ -57,7 +57,7 @@ class TablesProvider with ChangeNotifier {
     DatatableHeader(
         text: "ID",
         value: "id",
-        show: true,
+        show: false,
         sortable: true,
         textAlign: TextAlign.center),
     DatatableHeader(
@@ -119,7 +119,7 @@ class TablesProvider with ChangeNotifier {
     DatatableHeader(
         text: "ID",
         value: "productID",
-        show: true,
+        show: false,
         sortable: true,
         textAlign: TextAlign.center),
     DatatableHeader(
@@ -167,7 +167,7 @@ class TablesProvider with ChangeNotifier {
     DatatableHeader(
         text: "Picture",
         value: "pic",
-        show: true,
+        show: false,
         sortable: true,
         textAlign: TextAlign.center),
   ];
@@ -176,7 +176,7 @@ class TablesProvider with ChangeNotifier {
     DatatableHeader(
         text: "ID",
         value: "id",
-        show: true,
+        show: false,
         sortable: true,
         textAlign: TextAlign.center),
     DatatableHeader(
@@ -209,8 +209,8 @@ class TablesProvider with ChangeNotifier {
   List<DatatableHeader> categoriesTableHeader = [
     DatatableHeader(
         text: "ID",
-        value: "id",
-        show: true,
+        value: "false",
+        show: false,
         sortable: true,
         textAlign: TextAlign.center),
     DatatableHeader(
@@ -226,7 +226,7 @@ class TablesProvider with ChangeNotifier {
   DatatableHeader(
       text: "ID",
       value: "pazadaHistoryID",
-      show: true,
+      show: false,
       sortable: true,
       textAlign: TextAlign.center
   ),
@@ -244,6 +244,13 @@ class TablesProvider with ChangeNotifier {
     sortable: true,
     textAlign: TextAlign.center
   ),
+    DatatableHeader(
+        text: "Grand Total",
+        value: "Grand_Total",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.center
+    ),
     DatatableHeader(
         text: "Driver Name",
         value: "driver_name",
@@ -298,7 +305,7 @@ class TablesProvider with ChangeNotifier {
     DatatableHeader(
         text: "ID",
         value: "pazadaHistoryID",
-        show: true,
+        show: false,
         sortable: true,
         textAlign: TextAlign.center
     ),
@@ -384,7 +391,7 @@ class TablesProvider with ChangeNotifier {
     DatatableHeader(
         text: "ID",
         value: "pazadaHistoryID",
-        show: true,
+        show: false,
         sortable: true,
         textAlign: TextAlign.center
     ),
@@ -403,22 +410,29 @@ class TablesProvider with ChangeNotifier {
         textAlign: TextAlign.center
     ),
     DatatableHeader(
-        text: "Driver Name",
-        value: "driver_name",
+        text: "Seller Name",
+        value: "seller_name",
         show: true,
         sortable: true,
         textAlign: TextAlign.center
     ),
     DatatableHeader(
-        text: "Driver Phone",
-        value: "driver_phone",
+        text: "Item Name",
+        value: "item_name",
         show: true,
         sortable: true,
         textAlign: TextAlign.center
     ),
     DatatableHeader(
-        text: "Transaction Date",
-        value: "created_at",
+        text: "Item Value",
+        value: "item_value",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.center
+    ),
+    DatatableHeader(
+        text: "Grand Total",
+        value: "Grand_Total",
         show: true,
         sortable: true,
         textAlign: TextAlign.center
@@ -433,6 +447,27 @@ class TablesProvider with ChangeNotifier {
     DatatableHeader(
         text: "Passenger Phone",
         value: "passenger_phone",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.center
+    ),
+    DatatableHeader(
+        text: "Transaction Date",
+        value: "created_at",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.center
+    ),
+    DatatableHeader(
+        text: "Driver Name",
+        value: "driver_name",
+        show: true,
+        sortable: true,
+        textAlign: TextAlign.center
+    ),
+    DatatableHeader(
+        text: "Driver Phone",
+        value: "driver_phone",
         show: true,
         sortable: true,
         textAlign: TextAlign.center
@@ -650,6 +685,7 @@ class TablesProvider with ChangeNotifier {
         "passenger_name": pazadauserhistory.passenger_name,
         "passenger_phone": pazadauserhistory.passenger_phone,
         "pickup_address": pazadauserhistory.pickup_address,
+        "Grand_Total": pazadauserhistory.Grand_Total,
       });
     }
     return temps;
@@ -691,6 +727,12 @@ class TablesProvider with ChangeNotifier {
         "passenger_name": pazadasellerhistory.passenger_name,
         "passenger_phone": pazadasellerhistory.passenger_phone,
         "pickup_address": pazadasellerhistory.pickup_address,
+        "seller_name": pazadasellerhistory.seller_name,
+        "item_name": pazadasellerhistory.item_name,
+        "item_value": pazadasellerhistory.item_value,
+        "Grand_Total": pazadasellerhistory.Grand_Total,
+
+
       });
     }
     return temps;
@@ -813,6 +855,7 @@ class TablesProvider with ChangeNotifier {
         "passenger_name": pazadauserhistory.passenger_name,
         "passenger_phone": pazadauserhistory.passenger_phone,
         "pickup_address": pazadauserhistory.pickup_address,
+        "Grand_Total": pazadauserhistory.Grand_Total,
 
       });
     }
@@ -854,6 +897,11 @@ class TablesProvider with ChangeNotifier {
         "passenger_name": pazadasellerhistory.passenger_name,
         "passenger_phone": pazadasellerhistory.passenger_phone,
         "pickup_address": pazadasellerhistory.pickup_address,
+        "seller_name": pazadasellerhistory.seller_name,
+        "item_name": pazadasellerhistory.item_name,
+        "item_value": pazadasellerhistory.item_value,
+        "Grand_Total": pazadasellerhistory.Grand_Total,
+
       });
     }
     return temps;
@@ -901,14 +949,14 @@ class TablesProvider with ChangeNotifier {
     brandsTableSource.addAll(_getBrandsData());
     UserHistoryleSource.addAll(_getUserHistoryData());//user history
     DrivesHistoryleSource.addAll(_getDriversHistoryData());//Driver history
-    SellerHistoryTableSource.addAll(getSellerHistoryData());//Seller history
+    SellerHistoryTableSource.addAll(_getSellerHistoryData());//Seller history
 
 
 
     isLoading = false;
     notifyListeners();
   }
-
+/////////////////////////////////////////////////////////////////// ON SORT ////////////////////////////////////////////////
   onSort(dynamic value) {
     sortColumn = value;
     sortAscending = !sortAscending;
@@ -922,6 +970,111 @@ class TablesProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  onSortPazahero(dynamic value) {
+    sortColumn = value;
+    sortAscending = !sortAscending;
+    if (sortAscending) {
+      usersTableSource
+          .sort((a, b) => b["$sortColumn"].compareTo(a["$sortColumn"]));
+    } else {
+      usersTableSource
+          .sort((a, b) => a["$sortColumn"].compareTo(b["$sortColumn"]));
+    }
+    notifyListeners();
+  }
+
+  onSortDriver(dynamic value) {
+    sortColumn = value;
+    sortAscending = !sortAscending;
+    if (sortAscending) {
+      driverTableSource
+          .sort((a, b) => b["$sortColumn"].compareTo(a["$sortColumn"]));
+    } else {
+      driverTableSource
+          .sort((a, b) => a["$sortColumn"].compareTo(b["$sortColumn"]));
+    }
+    notifyListeners();
+  }
+
+  onSortSeller(dynamic value) {
+    sortColumn = value;
+    sortAscending = !sortAscending;
+    if (sortAscending) {
+      brandsTableSource
+          .sort((a, b) => b["$sortColumn"].compareTo(a["$sortColumn"]));
+    } else {
+      brandsTableSource
+          .sort((a, b) => a["$sortColumn"].compareTo(b["$sortColumn"]));
+    }
+    notifyListeners();
+  }
+
+  onSortUserHistory(dynamic value) {
+    sortColumn = value;
+    sortAscending = !sortAscending;
+    if (sortAscending) {
+      UserHistoryleSource
+          .sort((a, b) => b["$sortColumn"].compareTo(a["$sortColumn"]));
+    } else {
+      UserHistoryleSource
+          .sort((a, b) => a["$sortColumn"].compareTo(b["$sortColumn"]));
+    }
+    notifyListeners();
+  }
+
+  onSortDriverHistory(dynamic value) {
+    sortColumn = value;
+    sortAscending = !sortAscending;
+    if (sortAscending) {
+      DrivesHistoryleSource
+          .sort((a, b) => b["$sortColumn"].compareTo(a["$sortColumn"]));
+    } else {
+      DrivesHistoryleSource
+          .sort((a, b) => a["$sortColumn"].compareTo(b["$sortColumn"]));
+    }
+    notifyListeners();
+  }
+
+  onSortSellerHistory(dynamic value) {
+    sortColumn = value;
+    sortAscending = !sortAscending;
+    if (sortAscending) {
+      SellerHistoryTableSource
+          .sort((a, b) => b["$sortColumn"].compareTo(a["$sortColumn"]));
+    } else {
+      SellerHistoryTableSource
+          .sort((a, b) => a["$sortColumn"].compareTo(b["$sortColumn"]));
+    }
+    notifyListeners();
+  }
+
+  onSortProduct(dynamic value) {
+    sortColumn = value;
+    sortAscending = !sortAscending;
+    if (sortAscending) {
+      productsTableSource
+          .sort((a, b) => b["$sortColumn"].compareTo(a["$sortColumn"]));
+    } else {
+      productsTableSource
+          .sort((a, b) => a["$sortColumn"].compareTo(b["$sortColumn"]));
+    }
+    notifyListeners();
+  }
+
+  onSortCat(dynamic value) {
+    sortColumn = value;
+    sortAscending = !sortAscending;
+    if (sortAscending) {
+      categoriesTableSource
+          .sort((a, b) => b["$sortColumn"].compareTo(a["$sortColumn"]));
+    } else {
+      categoriesTableSource
+          .sort((a, b) => a["$sortColumn"].compareTo(b["$sortColumn"]));
+    }
+    notifyListeners();
+  }
+
+  //////////////////////////////////// ON SELECT //////////////////////////////////////////////////////////////////
   onSelected(bool value, Map<String, dynamic> item) {//ito single selection
     print("$value  $item + t=============================");
     if (value) {
@@ -937,6 +1090,7 @@ class TablesProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
   onSelectProduct(bool value, Map<String, dynamic> item) {//ito single selection
     print("$value  $item + t=============================");
     if (value) {
@@ -970,6 +1124,7 @@ class TablesProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
   onSelectAlldriver(bool value) {
     if (value) {
       selecteds = driverTableSource.map((entry) => entry).toList().cast();
@@ -978,6 +1133,7 @@ class TablesProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
   onSelectAllseller(bool value) {
     if (value) {
       selecteds = brandsTableSource.map((entry) => entry).toList().cast();
@@ -986,6 +1142,7 @@ class TablesProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
   onSelectAllpazakay(bool value) {
     if (value) {
       selecteds = UserHistoryleSource.map((entry) => entry).toList().cast();
@@ -994,6 +1151,7 @@ class TablesProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
   onSelectAllpazabuy(bool value) {
     if (value) {
       selecteds = DrivesHistoryleSource.map((entry) => entry).toList().cast();
@@ -1002,6 +1160,7 @@ class TablesProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
   onSelectAllpazship(bool value) {
     if (value) {
       selecteds = SellerHistoryTableSource.map((entry) => entry).toList().cast();
@@ -1010,6 +1169,7 @@ class TablesProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
   onSelectAllproduct(bool value) {
     if (value) {
       selecteds = productsTableSource.map((entry) => entry).toList().cast();
@@ -1018,6 +1178,7 @@ class TablesProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
   onSelectAllcat(bool value) {
     if (value) {
       selecteds = categoriesTableSource  .map((entry) => entry).toList().cast();

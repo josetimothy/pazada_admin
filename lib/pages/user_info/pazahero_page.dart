@@ -97,41 +97,40 @@ class _PazaheroPageState extends State<PazaheroPage> {
                         },
                         icon: Icon(Icons.remove_circle_outline,color: Colors.white,),
                         label: Text("DeActivate", style: TextStyle(color: Colors.white))),
-                    SizedBox(width: 10,),
-
-                    Container(//dropdown
-                      height: 33,
-                      width: MediaQuery.of(context).size.width * .10,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(5),
-
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:0, ),
-                        child: DropdownButton(
-
-                          underline: SizedBox(),
-                          isExpanded: true,
-                          icon: Icon(Icons.arrow_drop_down, size: 25,),
-                          hint: Text("See User",style: TextStyle(fontSize: 12, fontFamily: "bolt"),textAlign: TextAlign.center, ),
-                          value: pazaheroType,
-                          onChanged:(userValue){
-                            setState(() {
-                              pazaheroType = userValue;
-                              usertypeTextEditingController.text = pazaheroType;
-                            });
-                          },
-                          items: pazahero.map((pazaheroItem){
-                            return DropdownMenuItem(
-
-                              value: pazaheroItem,
-                              child: Text(pazaheroItem,style: TextStyle(fontSize: 12, fontFamily: "bolt"),textAlign: TextAlign.center,),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
+                    // SizedBox(width: 10,),
+                    // Container(//dropdown
+                    //   height: 33,
+                    //   width: MediaQuery.of(context).size.width * .10,
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.grey[200],
+                    //     borderRadius: BorderRadius.circular(5),
+                    //
+                    //   ),
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.symmetric(horizontal:0, ),
+                    //     child: DropdownButton(
+                    //
+                    //       underline: SizedBox(),
+                    //       isExpanded: true,
+                    //       icon: Icon(Icons.arrow_drop_down, size: 25,),
+                    //       hint: Text("See User",style: TextStyle(fontSize: 12, fontFamily: "bolt"),textAlign: TextAlign.center, ),
+                    //       value: pazaheroType,
+                    //       onChanged:(userValue){
+                    //         setState(() {
+                    //           pazaheroType = userValue;
+                    //           usertypeTextEditingController.text = pazaheroType;
+                    //         });
+                    //       },
+                    //       items: pazahero.map((pazaheroItem){
+                    //         return DropdownMenuItem(
+                    //
+                    //           value: pazaheroItem,
+                    //           child: Text(pazaheroItem,style: TextStyle(fontSize: 12, fontFamily: "bolt"),textAlign: TextAlign.center,),
+                    //         );
+                    //       }).toList(),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(width: 10,),
                     Container(
                       height: 33,
@@ -154,32 +153,37 @@ class _PazaheroPageState extends State<PazaheroPage> {
                       ),
                     ),
 
-                    // actions: [
-                    //   if (tablesProvider.isSearch)
-                    //     Expanded(
-                    //         child: TextField(
-                    //           decoration: InputDecoration(
-                    //               prefixIcon: IconButton(
-                    //                   icon: Icon(Icons.cancel),
-                    //                   onPressed: () {
-                    //                     setState(() {
-                    //                       tablesProvider.isSearch = false;
-                    //                     });
-                    //                   }),
-                    //               suffixIcon: IconButton(
-                    //                   icon: Icon(Icons.search), onPressed: () {})),
-                    //         )),
-                    //   if (!tablesProvider.isSearch)
-                    //     IconButton(
-                    //         icon: Icon(Icons.search),
-                    //         onPressed: () {
-                    //           setState(() {
-                    //             tablesProvider.isSearch = true;
-                    //           });
-                    //         })
-                    // ],
-                        ]),
-                    headers: tablesProvider.usersTableHeader,
+                  ]),
+            actions: [
+
+              if (tablesProvider.isSearch)
+                Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                          prefixIcon: IconButton(
+                              icon: Icon(Icons.cancel),
+                              onPressed: () {
+                                setState(() {
+                                  tablesProvider.isSearch = false;
+                                });
+                              }),
+                          suffixIcon: IconButton(
+                              icon: Icon(Icons.search), onPressed: () {
+                          })),
+                    )),
+              if (!tablesProvider.isSearch)
+                IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+
+                      setState(() {
+                        tablesProvider.isSearch = true;
+                      });
+                    })
+            ],
+
+
+            headers: tablesProvider.usersTableHeader,
                     source: tablesProvider.usersTableSource,
                     selecteds: tablesProvider.selecteds,
                     showSelect: tablesProvider.showSelect,
@@ -187,49 +191,49 @@ class _PazaheroPageState extends State<PazaheroPage> {
                     onTabRow: (data) {
                       print(data);
                     },
-                    onSort: tablesProvider.onSort,
+                    onSort: tablesProvider.onSortPazahero,
                     sortAscending: tablesProvider.sortAscending,
                     sortColumn: tablesProvider.sortColumn,
                     isLoading: tablesProvider.isLoading,
                     onSelect: tablesProvider.onSelected,
                     onSelectAll: tablesProvider.onSelectAlluser,
-                    footers: [
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: Text("Rows per page:"),
-                      ),
-                      if (tablesProvider.perPages != null)
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15),
-                          child: DropdownButton(
-                              value: tablesProvider.currentPerPage,
-                              items: tablesProvider.perPages
-                                  .map((e) => DropdownMenuItem(
-                                child: Text("$e"),
-                                value: e,
-                              ))
-                                  .toList(),
-                              onChanged: (value) {}),
-                        ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                            "${tablesProvider.currentPage} - ${tablesProvider.currentPage} of ${tablesProvider.total}"),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          size: 16,
-                        ),
-                        onPressed: tablesProvider.previous,
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.arrow_forward_ios, size: 16),
-                        onPressed: tablesProvider.next,
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                      )
-                    ],
+                    // footers: [
+                    //   Container(
+                    //     padding: EdgeInsets.symmetric(horizontal: 15),
+                    //     child: Text("Rows per page:"),
+                    //   ),
+                    //   if (tablesProvider.perPages != null)
+                    //     Container(
+                    //       padding: EdgeInsets.symmetric(horizontal: 15),
+                    //       child: DropdownButton(
+                    //           value: tablesProvider.currentPerPage,
+                    //           items: tablesProvider.perPages
+                    //               .map((e) => DropdownMenuItem(
+                    //             child: Text("$e"),
+                    //             value: e,
+                    //           ))
+                    //               .toList(),
+                    //           onChanged: (value) {}),
+                    //     ),
+                    //   Container(
+                    //     padding: EdgeInsets.symmetric(horizontal: 15),
+                    //     child: Text(
+                    //         "${tablesProvider.currentPage} - ${tablesProvider.currentPage} of ${tablesProvider.total}"),
+                    //   ),
+                    //   IconButton(
+                    //     icon: Icon(
+                    //       Icons.arrow_back_ios,
+                    //       size: 16,
+                    //     ),
+                    //     onPressed: tablesProvider.previous,
+                    //     padding: EdgeInsets.symmetric(horizontal: 15),
+                    //   ),
+                    //   IconButton(
+                    //     icon: Icon(Icons.arrow_forward_ios, size: 16),
+                    //     onPressed: tablesProvider.next,
+                    //     padding: EdgeInsets.symmetric(horizontal: 15),
+                    //   )
+                    // ],
                   ),
                 ),
               ),

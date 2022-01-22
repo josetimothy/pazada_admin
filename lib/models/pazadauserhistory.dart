@@ -12,6 +12,7 @@ class PazadaUserHistoryModel {
   static const PASSENGER_NAME = "passenger_name";
   static const PASSENGER_PHONE = "passenger_phone";
   static const PICKUP_ADDRESS = "pickup_address";
+  static const GRANDTOTAL = "Grand_Total";
 
 
   String _pazadaHistoryID;
@@ -24,6 +25,8 @@ class PazadaUserHistoryModel {
   String _passenger_name;
   String _passenger_phone;
   String _pickup_address;
+  String _Grand_Total;
+
 
 
   String get pazadaHistoryID => _pazadaHistoryID;
@@ -36,6 +39,7 @@ class PazadaUserHistoryModel {
   String get passenger_name => _passenger_name;
   String get passenger_phone => _passenger_phone;
   String get pickup_address => _pickup_address;
+ String  get Grand_Total =>  _Grand_Total;
 
 
 
@@ -51,5 +55,6 @@ class PazadaUserHistoryModel {
     _passenger_name = snapshot.data()[PASSENGER_NAME];
     _passenger_phone = snapshot.data()[PASSENGER_PHONE];
     _pickup_address = snapshot.data()[PICKUP_ADDRESS];
+    _Grand_Total = snapshot.data()[GRANDTOTAL];
   }
 }
